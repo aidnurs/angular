@@ -1,1 +1,10 @@
-<p>detail-todo works!</p>
+<div *ngIf="todo">
+  {{todo.title}}
+  {{todo.description}}
+  {{todo.done}}
+  <div>
+    <label for="todo-done">Done: </label>
+    <input id="todo-done" type="checkbox" [(ngModel)]="todo.done">
+  </div>
+</div>
+

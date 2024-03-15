@@ -1,21 +1,36 @@
-import { Component } from '@angular/core';
+import {Component} from '@angular/core';
 import {NgForOf} from "@angular/common";
+import {RouterLink} from "@angular/router";
+import {DetailTodoComponent} from "../detail-todo/detail-todo.component";
+import {Todo} from "../todo";
+import {DetailService} from "../services/detail.service";
+import {MessagesComponent} from "../messages/messages.component";
 
 @Component({
   selector: 'app-list-todo',
   standalone: true,
   imports: [
-    NgForOf
+    NgForOf,
+    RouterLink,
+    DetailTodoComponent,
+    MessagesComponent
   ],
   templateUrl: './list-todo.component.html',
   styleUrl: './list-todo.component.css'
 })
 export class ListTodoComponent {
   title = 'List Todo';
-  todos = [
-    { id: 1, title: 'Todo 1' },
-    { id: 2, title: 'Todo 2' },
-    { id: 3, title: 'Todo 3' },
-  ];
-  constructor() { }
+  todos: Todo[] = [];
+
+  constructor(private todoService: DetailService,
+  ) {
+  }
+
+  getTodos(): void {
+    this.todoService.getTodo().subscribe(todos => this.todos = todos)
+  }
+
+  ngOnInit() {
+    this.getTodos();
+  }
 }

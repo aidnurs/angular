@@ -3,6 +3,7 @@
 </h1>
 <ul>
   <li *ngFor="let todo of todos">
-    {{todo.title}}
+    <app-detail-todo [todo]="todo"></app-detail-todo>
   </li>
+  <app-messages></app-messages>
 </ul>
