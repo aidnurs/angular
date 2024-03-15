@@ -1,10 +1,8 @@
-<div *ngIf="todo">
-  {{todo.title}}
-  {{todo.description}}
-  {{todo.done}}
-  <div>
-    <label for="todo-done">Done: </label>
-    <input id="todo-done" type="checkbox" [(ngModel)]="todo.done">
-  </div>
+<div class="form-check" *ngIf="todo">
+  <input class="form-check-input" type="checkbox" [id]="'done'+index" [(ngModel)]="todo.done">
+  <label class="form-check-label" [for]="'done'+index">
+    {{todo.title}}
+  </label>
+  <button class="btn btn-danger" (click)="onDelete()">Delete</button>
 </div>
 

@@ -15,5 +15,4 @@ import {NavComponent} from "./nav/nav.component";
   styleUrl: './app.component.css',
 })
 export class AppComponent {
-  title = 'Hello World!';
 }

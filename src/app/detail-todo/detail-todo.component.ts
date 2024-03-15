@@ -1,5 +1,5 @@
-import {Component, Input} from '@angular/core';
-import {Todo} from "../todo";
+import {Component, EventEmitter, Input, Output} from '@angular/core';
+import {Todo} from "../interfaces/todo";
 import {CommonModule} from "@angular/common";
 import {FormsModule} from "@angular/forms";
 
@@ -15,7 +15,13 @@ import {FormsModule} from "@angular/forms";
 })
 export class DetailTodoComponent {
   @Input() todo?: Todo;
+  @Input() index?: number;
+  @Output() deleteTodo = new EventEmitter<number>();
 
   constructor() {
+  }
+
+  onDelete() {
+    this.deleteTodo.emit(this.todo?.id);
   }
 }
