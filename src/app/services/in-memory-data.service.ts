@@ -22,7 +22,7 @@ export class InMemoryDataService {
   }
 
   genId(todos: Todo[]): number {
-    return todos.length > 0 ? Math.max(...todos.map(todo => todo.id)) + 1 : 0;
+    return todos.length > 0 ? Math.max(...todos.map(todo => todo.id || 0)) + 1 : 0;
   }
 
   constructor() {

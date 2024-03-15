@@ -1,6 +1,6 @@
 import {Injectable} from '@angular/core';
 import {Todo} from "../interfaces/todo";
-import {Observable} from "rxjs";
+import {catchError, Observable} from "rxjs";
 import {HttpClient} from "@angular/common/http";
 
 @Injectable({
@@ -13,16 +13,24 @@ export class TodoService {
     return this.http.get<Todo[]>(this.url);
   }
 
-  updateTodo (todo: Todo): Observable<any> {
+  updateTodo(todo: Todo): Observable<any> {
     return this.http.put(this.url, todo);
   }
 
-  addTodo (todo: Todo): Observable<Todo> {
-    return this.http.post<Todo>(this.url, todo);
+  addTodo(todo: Todo): void {
+    this.http.post<Todo>(this.url, todo).pipe(
+      catchError(err => {
+          console.error(err)
+          throw err
+        }
+      )
+    ).subscribe(() => {
+      console.log('Todo added')
+      this.getTodos()
+    })
   }
 
-  deleteTodo (todoId: number): Observable<Todo> {
-    console.log('deleteTodo', todoId);
+  deleteTodo(todoId: number): Observable<Todo> {
     const url = `${this.url}/${todoId}`;
 
     return this.http.delete<Todo>(url);

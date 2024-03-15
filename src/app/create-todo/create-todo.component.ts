@@ -2,6 +2,7 @@ import {Component} from '@angular/core';
 import {FormsModule} from "@angular/forms";
 import {CommonModule} from "@angular/common";
 import {Todo} from "../interfaces/todo";
+import {TodoService} from "../services/todo.service";
 
 @Component({
   selector: 'app-create-todo',
@@ -15,15 +16,14 @@ import {Todo} from "../interfaces/todo";
 })
 export class CreateTodoComponent {
   todo: Todo = {
-    id: 0,
     title: '',
     done: false
   };
 
-  constructor() {
+  constructor(private todoService: TodoService) {
   }
 
   onSubmit() {
-    console.log('Form submitted', this.todo);
+    this.todoService.addTodo(this.todo)
   }
 }
